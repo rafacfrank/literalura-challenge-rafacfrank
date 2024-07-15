@@ -1,8 +1,18 @@
 package com.rafacfrank.literalura_rafacfrank.principal;
 
+import com.rafacfrank.literalura_rafacfrank.model.Autor;
+import com.rafacfrank.literalura_rafacfrank.model.DadosLivros;
+import com.rafacfrank.literalura_rafacfrank.model.Livro;
+import com.rafacfrank.literalura_rafacfrank.repositories.LivroRepository;
+import com.rafacfrank.literalura_rafacfrank.service.ConsumoAPI;
+import com.rafacfrank.literalura_rafacfrank.service.ConverteDados;
+
+import java.util.List;
+import java.util.Scanner;
+
 public class Principal {
 
-    private ConsultaAPI consultaAPI = new ConsultaAPI();
+    private ConsumoAPI consultaAPI = new ConsumoAPI();
     private ConverteDados converteDados = new ConverteDados();
     private Scanner leitura = new Scanner(System.in);
     private LivroRepository repository;
@@ -25,7 +35,7 @@ public class Principal {
                 4 - Listar Autores vivos em determinado ano
                 5 - Listar Livros em determinado idioma
                 6 - Listar Livros em um determinado idioma
-                7 - Listar Estatísticas dos livros
+                7 - Listar Estatísticas de livros
                 
                 0 - Sair
                 -------------------------------------------
@@ -64,7 +74,7 @@ public class Principal {
                         System.out.println("Opção inválida");
                 }
             }catch (InputMismatchException e){
-                System.out.println("Entrada inválida. Por favor, insira um número inteiro.");
+                System.out.println("Opção inválida. Por favor, insira uma opção valida.");
                 leitura.nextLine();
             }
         }
@@ -76,10 +86,10 @@ public class Principal {
         System.out.println("Buscando...");
         String enderecoBusca = endereco.concat(nomeLivro.replace(" ", "+").toLowerCase().trim());
 
-        String json = consultaAPI.buscar(enderecoBusca);
+        String json = consultaAPI.obterDados(enderecoBusca);
         String jsonLivro = converteDados.extraiObjetoJson(json, "results");
 
-        List<LivroDados> livrosDTO = converteDados.obterLista(jsonLivro, LivroDados.class);
+        List<DadosLivros> livrosDTO = converteDados.obterLista(jsonLivro, DadosLivros.class);
 
         if (livrosDTO.size() > 0) {
             Livro livro = new Livro(livrosDTO.get(0));
