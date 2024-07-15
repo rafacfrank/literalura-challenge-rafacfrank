@@ -1,5 +1,7 @@
 package com.rafacfrank.literalura_rafacfrank.model;
 
+import jakarta.persistence.*;
+
 @Entity
 @Table(name = "livros")
 public class Livro {
@@ -19,7 +21,7 @@ public class Livro {
 
     public Livro() {}
 
-    public Livro(LivroDados livroDados) {
+    public Livro(DadosLivros livroDados) {
         this.titulo = livroDados.titulo();
         Autor autor = new Autor(livroDados.authors().get(0));
         this.autor = autor;

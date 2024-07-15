@@ -1,5 +1,12 @@
 package com.rafacfrank.literalura_rafacfrank.model;
 
+import jakarta.persistence.*;
+
+import java.time.Year;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Entity
 @Table(name = "autores")
 public class Autor {
@@ -20,7 +27,7 @@ public class Autor {
 
     public Autor() {}
 
-    public Autor(AutorDados autorDados) {
+    public Autor(DadosAutor autorDados) {
         this.autor = autorDados.autor();
         this.anoNascimento = Year.of(autorDados.anoNascimento());
         this.anoFalecimento = Year.of(autorDados.anoFalecimento());

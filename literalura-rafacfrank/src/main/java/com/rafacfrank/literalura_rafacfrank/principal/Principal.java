@@ -7,6 +7,9 @@ import com.rafacfrank.literalura_rafacfrank.repositories.LivroRepository;
 import com.rafacfrank.literalura_rafacfrank.service.ConsumoAPI;
 import com.rafacfrank.literalura_rafacfrank.service.ConverteDados;
 
+import java.time.Year;
+import java.util.DoubleSummaryStatistics;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
