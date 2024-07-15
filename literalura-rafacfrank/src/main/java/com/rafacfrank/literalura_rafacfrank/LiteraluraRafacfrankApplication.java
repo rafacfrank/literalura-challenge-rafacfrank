@@ -8,20 +8,19 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LiteraluraRafacfrankApplication implements CommandLineRunner {
+public class LiterAluraApplication implements CommandLineRunner {
+
+	@Autowired
+	private LivroRepository repository;
 
 	public static void main(String[] args) {
-		SpringApplication.run(LiteraluraRafacfrankApplication.class, args);
+		SpringApplication.run(LiterAluraApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		ConsumoAPI consumoAPI = new ConsumoAPI();
-		var json = consumoAPI.obterDados("https://gutendex.com/books/?search=dom+casmurro");
-		System.out.println(json);
-		ConverteDados conversor = new ConverteDados();
-		DadosLivros dados = conversor.obterDados(json, DadosLivros.class);
-		System.out.println(dados);
-
+		Principal principal = new Principal(repository);
+		principal.exibeMenu();
 	}
+}
 }
